@@ -52,6 +52,10 @@ const PostHistory = () => {
       snapshot.forEach((doc) => {
         postsContainer.push({ id: doc.id, ...doc.data() });
       });
+  
+      // Sort the posts array by timestamp (in descending order)
+      postsContainer.sort((a, b) => b.timestamp.seconds - a.timestamp.seconds);
+  
       setPosts(postsContainer);
     } catch (error) {
       console.error("Error loading posts: ", error);
@@ -59,6 +63,7 @@ const PostHistory = () => {
       setLoading(false);
     }
   };
+  
 
   // Handle deletion of a post
   const deletePost = async (postId) => {

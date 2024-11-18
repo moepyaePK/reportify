@@ -107,6 +107,24 @@ body {
     color: #9b0818;
 }
 
+/* Post History and Log Out buttons styling */
+.option button {
+    font-size: 1.2rem; /* Make the font size identical for both buttons */
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #b80a21;
+    color: #b80a21;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.option button:hover {
+    background-color: #b80a21;
+    color: white;
+}
+
+/* Log Out Styling */
 .logout {
     cursor: pointer;
     text-align: center;
@@ -137,4 +155,13 @@ body {
     .profile {
         width: 90%;
     }
+}
+
+.namecard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    align-items: center;
+    height: 50vh;
 }
