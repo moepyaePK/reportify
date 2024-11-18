@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import '../styles/addpost.css';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth'; // Firebase Authentication
 import { db } from '../firebaseconfig'; // Import Firebase configuration
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Form } from 'react-bootstrap';
-import '../styles/addpost.css';
+import { Button, Form, Navbar } from 'react-bootstrap';
+import ReportifyLogo from '../assets/ReportifyLogo.png'; // Add the logo image
 
 const AddPost = () => {
   // State to store form input values
@@ -68,7 +69,7 @@ const AddPost = () => {
 
     searchBox.addListener('places_changed', function () {
       const places = searchBox.getPlaces();
-      if (places.length == 0) return;
+      if (places.length === 0) return;
 
       marker.setMap(null);
 
@@ -76,24 +77,10 @@ const AddPost = () => {
       places.forEach(function (place) {
         if (!place.geometry || !place.geometry.location) return;
 
-        marker = new window.google.maps.Marker({
-          map: map,
-          draggable: true,
-          title: place.name,
-          position: place.geometry.location,
-        });
-
-        window.google.maps.event.addListener(marker, 'dragend', function (evt) {
-          setLocation(`${evt.latLng.lat()},${evt.latLng.lng()}`);
-        });
-
-        window.google.maps.event.addListener(map, 'click', function (event) {
-          const clickedLocation = event.latLng;
-          marker.setPosition(clickedLocation);
-          setLocation(`${clickedLocation.lat()},${clickedLocation.lng()}`);
-        });
-
+        marker.setMap(map);
+        marker.setPosition(place.geometry.location);
         setLocation(`${place.geometry.location.lat()},${place.geometry.location.lng()}`);
+
         if (place.geometry.viewport) {
           bounds.union(place.geometry.viewport);
         } else {
@@ -102,6 +89,7 @@ const AddPost = () => {
       });
       map.fitBounds(bounds);
     });
+
     setMapLoaded(true);
   };
 
@@ -114,13 +102,17 @@ const AddPost = () => {
       return;
     }
 
+    // Format Category and Critical Level
+    const formattedCategory = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+    const formattedCriticalLevel = criticalLevel.charAt(0).toUpperCase() + criticalLevel.slice(1).toLowerCase();
+
     const newPost = {
       uid: user.uid,
       Name: name,
-      Category: category,
+      Category: formattedCategory,
       Location: location,
       'Phone Number': phoneNumber,
-      'Scale Critical Level': criticalLevel,
+      'Scale Critical Level': formattedCriticalLevel,
       content: content,
       timestamp: serverTimestamp(),
     };
@@ -143,71 +135,160 @@ const AddPost = () => {
     }
   };
 
+  const getCriticalLevelDot = () => {
+    switch (criticalLevel) {
+      case 'High':
+        return <span className="dot red"></span>;  // Red for High
+      case 'Medium':
+        return <span className="dot orange"></span>; // Orange for Medium
+      case 'Low':
+        return <span className="dot yellow"></span>; // Yellow for Low
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="container mt-4">
-      <h3>Add a New Post</h3>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Content</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={3}
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Category</Form.Label>
-          <Form.Control
-            type="text"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Phone Number</Form.Label>
-          <Form.Control
-            type="text"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Critical Level</Form.Label>
-          <Form.Control
-            type="text"
-            value={criticalLevel}
-            onChange={(e) => setCriticalLevel(e.target.value)}
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Select Incident Location:</Form.Label>
-          <input
-            id="pac-input"
-            className="form-control"
-            type="text"
-            placeholder="Search for a location"
-            required
-          />
-          <div id="map" style={{ height: '300px', width: '100%', marginBottom: '20px' }}></div>
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
+    <div>
+            <nav className="navbar" style={{ backgroundColor: '#b80a21' }}>
+        <div className="container-fluid">
+          <a className="navbar-brand d-flex align-items-center" href="preview.html">
+            <img
+              src={ReportifyLogo}
+              alt="Reportify Logo"
+              width="80"
+              height="40"
+              className="d-inline-block me-2"
+            />
+            <span className="text-white">Reportify</span>
+          </a>
+        </div>
+      </nav>
+      <div className="container">
+        <div className="card border-light-subtle shadow-sm mt-4">
+          <div className="row g-0">
+            <div className="col-12 col-md-6">
+              <div className="card-body p-3 p-md-4 p-xl-5">
+                <h3>Add a New Post</h3>
+                <form onSubmit={handleSubmit}>
+                  <div className="row gy-3 gy-md-4">
+                    <div className="col-12">
+                      <label htmlFor="name" className="form-label">
+                        Name <span className="text-danger">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="col-12">
+                      <label htmlFor="category" className="form-label">
+                        Category <span className="text-danger">*</span>
+                      </label>
+                      <select
+                        className="form-control"
+                        id="category"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        required
+                      >
+                        <option value="">Select Category</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="natural_disasters">Natural Disasters</option>
+                        <option value="public_infrastructure">Public Infrastructure</option>
+                        <option value="public_space_accidents">Public Space Accidents</option>
+                        <option value="health_concerns">Health Concerns</option>
+                      </select>
+                    </div>
+                    <div className="col-12">
+                      <label htmlFor="criticalLevel" className="form-label">
+                        Critical Level <span className="text-danger">*</span>
+                      </label>
+                      <select
+                        className="form-control"
+                        id="criticalLevel"
+                        value={criticalLevel}
+                        onChange={(e) => setCriticalLevel(e.target.value)}
+                        required
+                      >
+                        <option value="">Select Critical Level</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                      </select>
+                    </div>
+                    <div className="col-12">
+                      <label htmlFor="location" className="form-label">
+                        Location
+                      </label>
+                      <input
+                        id="pac-input"
+                        className="form-control"
+                        type="text"
+                        placeholder="Search for a location"
+                      />
+                      <div id="map" style={{ height: '300px', width: '100%' }}></div>
+                    </div>
+                    <div className="col-12">
+                      <label htmlFor="phoneNumber" className="form-label">
+                        Phone Number
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="phoneNumber"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="col-12">
+                      <label htmlFor="content" className="form-label">
+                        Additional Comments
+                      </label>
+                      <textarea
+                        className="form-control"
+                        id="content"
+                        rows="3"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                        required
+                      ></textarea>
+                    </div>
+                    <div className="col-12">
+                      <button type="submit" className="btn btn-danger w-100">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div className="col-12 col-md-6 text-bg-primary">
+              <div className="d-flex align-items-center justify-content-center h-100">
+                <div className="col-10 col-xl-8 py-3">
+                <img
+                    className="img-fluid rounded mb-4"
+                    loading="lazy"
+                    src={ReportifyLogo}
+                    width="245"
+                    height="50"
+                    alt="Reportify Logo"
+                  />
+                  <h2 className="text-white">We make digital products that drive you to stand out.</h2>
+                  <p className="lead text-white">
+                    We write words, take photos, make videos, and interact with artificial intelligence.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

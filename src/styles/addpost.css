@@ -32,11 +32,20 @@ body {
 
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     flex-grow: 1;
+    height: 100vh;
+    padding-top: 170px;
 }
+
+.container-fluid{
+    z-index: 1;
+    background-color: #b80a21;
+}
+
 
 .navbar-brand {
     color: #b80a21;
@@ -87,3 +96,12 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.critical-level-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 10px;
+  }
+  
