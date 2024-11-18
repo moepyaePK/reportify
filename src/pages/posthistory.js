@@ -5,14 +5,6 @@ import {  onAuthStateChanged } from "firebase/auth";
 import {collection, query, where,getDocs,} from "firebase/firestore";
 import {db, auth} from "../firebaseconfig";
 
-
-
-
-
-
-
-
-
 const PostHistory = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);

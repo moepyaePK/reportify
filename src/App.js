@@ -7,13 +7,14 @@ import LoginPage from './pages/login';
 import SignUpPage from './pages/signup';
 import User from './pages/user';
 import PostHistory from './pages/posthistory';
+import Preview from './pages/preview';
 
 function App() {
   return (
     <Router>
       <Routes>
         {/* Auth Routes */}
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
 
         {/* Main App Routes */}
@@ -21,6 +22,8 @@ function App() {
         <Route path="/addpost" element={<AddPost />} />
         <Route path="/user" element={<User />} />
         <Route path="/posthistory" element={<PostHistory />} />
+        <Route path="/" element={<Preview />} />
+        
         {/* Catch-All for Undefined Routes */}
       </Routes>
     </Router>
