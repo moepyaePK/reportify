@@ -134,14 +134,15 @@ const Home = () => {
         ))}
       </div>
 
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-md">
-          <Button variant="outline-danger" href="/">Home</Button>
-          <Button variant="outline-danger" href="/addpost">Add Post</Button>
-          <Button variant="outline-danger">Maps</Button>
-          <Button variant="outline-danger" href="/user">User</Button>
-        </div>
-      </nav>
+      <footer className="navbar navbar-expand-lg bg-body-tertiary" style={{ position: 'fixed', bottom: 0, width: '100%', zIndex: 999 }}>
+  <div className="container-md">
+    <Button variant="outline-danger" href="/">Home</Button>
+    <Button variant="outline-danger" href="/addpost">Add Post</Button>
+    <Button variant="outline-danger">Notifications</Button>
+    <Button variant="outline-danger" href="/user">User</Button>
+  </div>
+</footer>
+
     </div>
   );
 };

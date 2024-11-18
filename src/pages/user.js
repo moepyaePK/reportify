@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import {  onAuthStateChanged } from 'firebase/auth';
-import {auth} from "../firebaseconfig"
-
-
-
+import '../styles/user.css';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from "../firebaseconfig";
+import ReportifyLogo from '../assets/ReportifyLogo.png';
 
 const User = () => {
   const [user, setUser] = useState(null);
@@ -16,7 +14,7 @@ const User = () => {
       if (currentUser) {
         setUser(currentUser);
       } else {
-        navigate('/'); // Redirect to login page
+        navigate('/'); // Redirect to login page if not logged in
       }
     });
 
@@ -33,19 +31,31 @@ const User = () => {
 
   return (
     <div className="container">
-      <nav className="navbar bg-body-tertiary">
+      {/* Navbar */}
+      <nav className="navbar" style={{ backgroundColor: '#b80a21' }}>
         <div className="container-fluid">
-          <span className="navbar-brand mb-0 h1">Reportify</span>
+          <a className="navbar-brand d-flex align-items-center" href="preview.html">
+            <img
+              src={ReportifyLogo}
+              alt="Reportify Logo"
+              width="80"
+              height="40"
+              className="d-inline-block me-2"
+            />
+            <span className="text-white">Reportify</span>
+          </a>
+          {/* Back button */}
           <button
             type="button"
-            className="btn btn-danger"
-            onClick={() => navigate(-1)}
+            className="btn btn-danger ms-auto"
+            onClick={() => navigate(-1)} // Go back to the previous page
           >
             Back
           </button>
         </div>
       </nav>
 
+      {/* Profile Section */}
       <div className="profile">
         <div className="avatar"></div>
         <div className="user-id">{user ? user.email : 'Loading...'}</div>

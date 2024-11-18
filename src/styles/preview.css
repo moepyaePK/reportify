@@ -6,13 +6,13 @@
 
 /* Style for the body to ensure full-height scrolling */
 body {
-    font-family: 'Times New Roman', serif, ;
-    height: 100vh;
+    height: auto; /* Allow body to expand based on content height */
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Prevent overflow issues */
+    overflow: auto; /* Allow scrolling if content exceeds the viewport */
     background-color: white;
 }
+
 
 
 .navbar-brand
@@ -23,7 +23,11 @@ body {
 
 .btn-danger{
     background-color: #b80a21;
+    margin-right: 20px;
+
 }
+
+
 
 #carouselExampleIndicators {
     margin-left: 30px;

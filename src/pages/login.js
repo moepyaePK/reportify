@@ -3,7 +3,6 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebaseconfig';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/login.css'; // Import the custom CSS
-
 // Importing images from the assets folder
 import ReportifyLogo from '../assets/ReportifyLogo.png';
 import ReportifyGraphic from '../assets/ReportifyLogo.png';
@@ -128,8 +127,6 @@ const LoginPage = () => {
                 <p className="mt-5 mb-4">Or sign in with</p>
                 <div className="d-flex gap-3 flex-column flex-xl-row">
                   <button className="btn bsb-btn-xl btn-outline-danger">Google</button>
-                  <button className="btn bsb-btn-xl btn-outline-danger">Facebook</button>
-                  <button className="btn bsb-btn-xl btn-outline-danger">Twitter</button>
                 </div>
               </div>
             </div>

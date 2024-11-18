@@ -1,0 +1,140 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    background-color: #f7f7f7; /* Light background */
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #b80a21; /* Reportify brand color */
+    padding: 10px 20px; /* Adjust padding for better spacing */
+}
+
+.navbar-brand {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand img {
+    margin-right: 10px;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.navbar-nav .btn-danger {
+    font-size: 1rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-left: 20px; /* Spacing between elements */
+}
+
+/* Button styling */
+.btn-danger {
+    background-color: #b80a21;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #9b0818;
+}
+
+/* Profile section */
+.profile {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 30px;
+    width: 80%;
+    max-width: 600px;
+    margin: 30px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ddd;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+.user-id {
+    font-size: 1.2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Options section */
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Individual option */
+.option {
+    text-align: center;
+}
+
+.icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #b80a21;
+    background-color: transparent;
+    border: none;
+    transition: color 0.3s ease;
+}
+
+.icon:hover {
+    color: #9b0818;
+}
+
+.logout {
+    cursor: pointer;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.logout:hover {
+    color: #9b0818;
+}
+
+.logout .icon {
+    font-size: 1.5rem;
+}
+
+/* Back Button */
+.btn-danger {
+    font-size: 1rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .profile {
+        width: 90%;
+    }
+}

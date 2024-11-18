@@ -1,0 +1,169 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  /* Navbar styling */
+  .navbar {
+    background-color: #b80a21; /* Reportify brand color */
+    padding: 10px 20px;
+  }
+  
+  .navbar-brand {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-brand img {
+    margin-right: 10px;
+  }
+  
+  .navbar-brand span {
+    font-size: 1.5rem;
+  }
+  
+  /* Content section */
+  .post-history-container {
+    background-color: #f7f7f7; /* Light background */
+    padding-bottom: 20px;
+  }
+  
+  .content {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+  }
+  
+  /* Individual post styles */
+  .post {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .post p {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  
+  .post p a {
+    color: #b80a21;
+    text-decoration: none;
+  }
+  
+  .post p a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Critical Level and Map section */
+  .post .critical-level {
+    font-weight: bold;
+    color: #b80a21;
+    margin-top: 10px;
+  }
+  
+  .post .map {
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 10px;
+  }
+  
+  .post .map a {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .post .map a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Delete button styling */
+  .btn-danger {
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c9302c;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .navbar-brand span {
+      font-size: 1.2rem;
+    }
+  
+    .content {
+      padding: 15px;
+    }
+  
+    .post {
+      padding: 15px;
+    }
+  
+    .post h3 {
+      font-size: 1.5rem;
+    }
+  
+    .post p {
+      font-size: 0.9rem;
+    }
+  
+    .btn-danger {
+      font-size: 0.9rem;
+      padding: 6px 10px;
+    }
+    /* Style for critical level dot colors */
+.dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  .dot.red {
+    background-color: red;
+  }
+  
+  .dot.orange {
+    background-color: orange;
+  }
+  
+  .dot.yellow {
+    background-color: yellow;
+  }
+  
+  /* Optional styles for the map container */
+  #map {
+    height: 300px;
+    width: 100%;
+  }
+  
+  }
+  

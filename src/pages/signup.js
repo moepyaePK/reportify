@@ -149,7 +149,7 @@ const SignUpPage = () => {
                 {errorMessage && <p className="text-danger mt-3">{errorMessage}</p>}
                 {successMessage && <p className="text-success mt-3">{successMessage}</p>}
                 <div className="d-flex justify-content-end mt-4">
-                  <a href="login.html" className="link-secondary text-decoration-none">
+                  <a href="login" className="link-secondary text-decoration-none">
                     Already have an account? Log in
                   </a>
                 </div>
