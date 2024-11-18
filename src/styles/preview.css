@@ -9,36 +9,65 @@ body {
     height: auto; /* Allow body to expand based on content height */
     display: flex;
     flex-direction: column;
-    overflow: auto; /* Allow scrolling if content exceeds the viewport */
     background-color: white;
 }
 
-
-
-.navbar-brand
-{
+.navbar-brand {
    color: #b80a21;
 }
 
-
-.btn-danger{
+.btn-danger {
     background-color: #b80a21;
     margin-right: 20px;
-
 }
-
-
 
 #carouselExampleIndicators {
     margin-left: 30px;
     margin-right: 30px;
     margin-top: 30px;
-    height: 70vh;
-  }
+    height: 70vh; /* Smaller height for the carousel */
+    max-height: 500px; /* Prevent it from being too tall */
+    overflow: hidden; /* Ensure no overflow */
+    
+}
 
-  .carousel-inner{
-    object-fit: cover; 
-    height: 70vh; 
-    width: 100%; 
-  }
+.carousel-inner {
+    height: 100%; /* Match the carousel container's height */
+    display: flex;
+   
+}
+
+.carousel-item img {
+    max-height: 100%; /* Ensure images scale down to fit carousel height */
+    max-width: 100%; /* Maintain aspect ratio */
+    object-fit: contain; /* Prevent images from being cropped */
+}
+/* Style the previous and next arrows */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #b80a21; /* Add a visible background color */
+    border-radius: 50%; /* Make it circular */
+    padding: 10px; /* Add padding for a larger clickable area */
+}
+
+/* Optional: Customize the arrow color */
+.carousel-control-prev-icon::before,
+.carousel-control-next-icon::before {
+    color: white; /* Change arrow color to white */
+    font-size: 20px; /* Adjust arrow size */
+}
+
+/* Ensure arrows are always visible */
+.carousel-control-prev,
+.carousel-control-next {
+    z-index: 1; /* Ensure they are above the images */
+    opacity: 1; /* Make them fully visible */
+}
+
+/* Hover effect for better interaction */
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+    background-color: #900; /* Darken the background color on hover */
+    transition: background-color 0.3s ease;
+}
 

@@ -4,6 +4,9 @@ import ReportifyLogo from '../assets/ReportifyLogo.png';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "../styles/preview.css";
+import image1 from "../assets/page1.png"
+import image2 from "../assets/page2.png"
+import image3 from "../assets/page3.png"
 
 function Preview() {
     const navigate = useNavigate();
@@ -63,21 +66,21 @@ function Preview() {
                 <div className="carousel-inner">
                     <div className="carousel-item active">
                         <img
-                            src="../assets/ReportifyLogo.png"
+                            src={image3}
                             className="d-block w-100"
                             alt="First Slide"
                         />
                     </div>
                     <div className="carousel-item">
                         <img
-                            src="../assets/ReportifyLogo.png"
+                            src={image2}
                             className="d-block w-100"
                             alt="Second Slide"
                         />
                     </div>
                     <div className="carousel-item">
                         <img
-                            src="../assets/ReportifyLogo.png"
+                            src={image1}
                             className="d-block w-100"
                             alt="Third Slide"
                         />
