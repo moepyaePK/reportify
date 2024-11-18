@@ -91,7 +91,7 @@ const Home = () => {
     <div>
        <nav className="navbar" style={{ backgroundColor: '#b80a21' }}>
         <div className="container-fluid">
-          <a className="navbar-brand d-flex align-items-center" href="preview.html">
+          <a className="navbar-brand d-flex align-items-center">
             <img
               src={ReportifyLogo}
               alt="Reportify Logo"
@@ -136,9 +136,9 @@ const Home = () => {
 
       <footer className="navbar navbar-expand-lg bg-body-tertiary" style={{ position: 'fixed', bottom: 0, width: '100%', zIndex: 999 }}>
   <div className="container-md">
-    <Button variant="outline-danger" href="/">Home</Button>
+    <Button variant="outline-danger" href="/home">Home</Button>
     <Button variant="outline-danger" href="/addpost">Add Post</Button>
-    <Button variant="outline-danger">Notifications</Button>
+  
     <Button variant="outline-danger" href="/user">User</Button>
   </div>
 </footer>
