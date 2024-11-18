@@ -279,9 +279,9 @@ const AddPost = () => {
                     height="50"
                     alt="Reportify Logo"
                   />
-                  <h2 className="text-white">We make digital products that drive you to stand out.</h2>
+                  <h2 className="text-white">Don't forget to fill the imformations properlly</h2>
                   <p className="lead text-white">
-                    We write words, take photos, make videos, and interact with artificial intelligence.
+                    Make sure to re-check your answers, your imformations mean a lot to the environment 
                   </p>
                 </div>
               </div>

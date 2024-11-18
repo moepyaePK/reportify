@@ -105,6 +105,10 @@ function Preview() {
                     <span className="visually-hidden">Next</span>
                 </button>
             </div>
+            <div className="intro-box p-4 border rounded">
+        <p className="text-center mb-0">
+        Welcome to Reprotify – your go-to platform for efficiently reporting incidents with ease and precision. Whether it's a road hazard, environmental concern, or safety issue, Reprotify empowers users to take action by marking the exact location on the map, categorizing the type of incident, and indicating its critical level. Our goal is to simplify incident reporting and ensure that your concerns are documented and visible to the right authorities. Join us in making communities safer and more responsive through Reprotify!        </p>
+    </div>
         </div>
     );
 }
