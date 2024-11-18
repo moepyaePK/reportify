@@ -1,18 +1,36 @@
-// src/Home.js
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { db } from '../firebaseconfig'; // Firebase configuration
-import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
+import '../styles/home.css'; // Import custom CSS
+import ReportifyLogo from '../assets/ReportifyLogo.png';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const mapRefs = useRef([]);
+
+  // Dynamically load Google Maps API
+  useEffect(() => {
+    const loadGoogleMapsScript = () => {
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDj1K-TPYo4CP503mBHL-n5Fhzr1kV4XKs`;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        console.log('Google Maps API loaded');
+      };
+      document.head.appendChild(script);
+    };
+
+    loadGoogleMapsScript();
+  }, []); // Load the API only once when component mounts
 
   // Load posts from Firestore
   useEffect(() => {
     const loadPosts = async () => {
       const postsContainer = [];
-      const postsQuery = query(collection(db, "posts"), orderBy("timestamp", "desc"),);
+      const postsQuery = query(collection(db, "posts"), orderBy("timestamp", "desc"));
       try {
         const snapshot = await getDocs(postsQuery);
         snapshot.forEach((doc) => {
@@ -27,34 +45,93 @@ const Home = () => {
     loadPosts();
   }, []); // Empty dependency array means this effect runs once on component mount
 
+  useEffect(() => {
+    posts.forEach((post, index) => {
+      const mapElement = mapRefs.current[index];
+      if (mapElement && window.google) { // Ensure Google Maps API is loaded
+        const coords = post.Location.split(',');
+        const latLng = { lat: parseFloat(coords[0]), lng: parseFloat(coords[1]) };
+        const map = new window.google.maps.Map(mapElement, {
+          center: latLng,
+          zoom: 8,
+        });
+
+        const marker = new window.google.maps.Marker({
+          position: latLng,
+          map: map,
+          title: post.Location,
+        });
+
+        const infoWindow = new window.google.maps.InfoWindow({
+          content: `<p>${post.Location}</p>`,
+        });
+
+        marker.addListener('click', () => {
+          infoWindow.open(map, marker);
+        });
+      }
+    });
+  }, [posts]);
+
+  // Helper function to determine critical level color
+  const getCriticalLevelClass = (level) => {
+    switch(level) {
+      case 'High':
+        return 'high-level';
+      case 'Medium':
+        return 'medium-level';
+      case 'Low':
+        return 'low-level';
+      default:
+        return ''; // Default if no critical level is found
+    }
+  };
+
   return (
     <div>
-      <nav className="navbar bg-body-tertiary">
+       <nav className="navbar" style={{ backgroundColor: '#b80a21' }}>
         <div className="container-fluid">
-          <span className="navbar-brand mb-0 h1">Reportify</span>
-          <a href="#!" className="ms-auto">
-            <i className="bi bi-person-circle fs-4" style={{ color: '#b80a21' }} onClick={() => window.location.href = 'user.html'}></i>
+          <a className="navbar-brand d-flex align-items-center" href="preview.html">
+            <img
+              src={ReportifyLogo}
+              alt="Reportify Logo"
+              width="80"
+              height="40"
+              className="d-inline-block me-2"
+            />
+            <span className="text-white">Reportify</span>
           </a>
         </div>
       </nav>
+      <div className="content">
+        {posts.map((post, index) => (
+          <div key={index} className="post">
+            <h5>Report by: {post.Name}</h5>
+            <p><strong>Content:</strong> {post.content}</p>
+            <p><strong>Category:</strong> {post.Category}</p>
+            <p><strong>Location:</strong> <a href={post.Location} target="_blank" rel="noopener noreferrer">{post.Location}</a></p>
 
-      <div className="container mt-4">
-        <div className="row">
-          <div className="col-12">
-            {posts.map((post, index) => (
-              <div key={index} className="post mb-3">
-                <h5>Report by: {post.Name}</h5>
-                <p><strong>Content:</strong> {post.content}</p>
-                <p><strong>Category:</strong> {post.Category}</p>
-                <p><strong>Location:</strong> <a href={post.Location} target="_blank" rel="noopener noreferrer">{post.Location}</a></p>
-                <p><strong>Critical Level:</strong> {post["Scale Critical Level"]}</p>
-                <p><strong>Phone Number:</strong> {post["Phone Number"]}</p>
-                <p><strong>Timestamp:</strong> {post.timestamp ? new Date(post.timestamp.seconds * 1000).toLocaleString() : 'N/A'}</p>
-                <hr />
-              </div>
-            ))}
+            {/* Critical Level with colored dot */}
+            <p>
+              <strong>Critical Level:</strong> 
+              <span 
+                className={`critical-level ${getCriticalLevelClass(post["Scale Critical Level"])}`}
+              ></span> 
+              {post["Scale Critical Level"]}
+            </p>
+
+            <p><strong>Phone Number:</strong> {post["Phone Number"]}</p>
+            <p><strong>Timestamp:</strong> {post.timestamp ? new Date(post.timestamp.seconds * 1000).toLocaleString() : 'N/A'}</p>
+
+            {/* Map container */}
+            <div
+              ref={(el) => (mapRefs.current[index] = el)}
+              className="map-container"
+            ></div>
+            
+            <hr />
           </div>
-        </div>
+        ))}
       </div>
 
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -62,7 +139,7 @@ const Home = () => {
           <Button variant="outline-danger" href="/">Home</Button>
           <Button variant="outline-danger" href="/addpost">Add Post</Button>
           <Button variant="outline-danger">Maps</Button>
-          <Button variant="outline-danger"  href="/user">User</Button>
+          <Button variant="outline-danger" href="/user">User</Button>
         </div>
       </nav>
     </div>

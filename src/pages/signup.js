@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-
-import { auth} from '../firebaseconfig';
-
-
-
-
-
+import { auth } from '../firebaseconfig';
+import ReportifyLogo from '../assets/ReportifyLogo.png'; // Correctly import the image
 
 const SignUpPage = () => {
+  // State hooks
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,6 +12,7 @@ const SignUpPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
+  // Sign-up function
   const handleSignUp = (event) => {
     event.preventDefault();
     setErrorMessage("");
@@ -31,7 +28,6 @@ const SignUpPage = () => {
         const user = userCredential.user;
         setSuccessMessage(`Sign-up successful! Welcome, ${user.email}`);
         console.log("User created successfully:", user);
-        // Redirect or perform further actions as needed
         setTimeout(() => (window.location.href = "./home"), 2000);
       })
       .catch((error) => {
@@ -46,7 +42,7 @@ const SignUpPage = () => {
         <div className="container-fluid">
           <a className="navbar-brand d-flex align-items-center" href="preview.html">
             <img
-              src="ReportifyLogo.png"
+              src={ReportifyLogo}  // Use the imported image
               alt="Reportify Logo"
               width="80"
               height="40"
@@ -65,7 +61,7 @@ const SignUpPage = () => {
                   <img
                     className="img-fluid rounded mb-4"
                     loading="lazy"
-                    src="ReportifyLogo.png"
+                    src={ReportifyLogo}  // Use the imported image
                     width="245"
                     height="80"
                     alt="Reportify Logo"

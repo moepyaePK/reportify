@@ -1,0 +1,101 @@
+/* Reset basic margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Body styles */
+  body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Navbar customization */
+  .navbar-brand {
+    color: #b80a21;
+  }
+  
+  .navbar {
+    background-color: #f0f2f5;
+  }
+  
+  /* Content Section (scrollable area) */
+  .content {
+    flex-grow: 1; /* Ensures the content section fills the remaining space */
+    overflow-y: auto; /* Enable vertical scroll */
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+    flex-direction: column;
+  }
+  
+  /* Individual posts */
+  .post {
+    background-color: white;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+    width: 80%; /* Makes the post take 80% of the container width */
+    max-width: 800px; /* Set max-width for larger screens */
+    text-align: left; /* Left-align content inside the post */
+  }
+  
+  /* Critical level color styling */
+  .critical-level {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  
+  .low-level {
+    background-color: lightyellow;
+  }
+  
+  .medium-level {
+    background-color: lightcoral;
+  }
+  
+  .high-level {
+    background-color: red;
+  }
+  
+  /* Map container styling */
+  .map-container {
+    height: 300px;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  /* Optional: Scrollbar customization */
+  .content::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .content::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Button customization for Navbar */
+  .navbar .btn {
+    border-radius: 25px;
+    font-size: 16px;
+    margin: 5px;
+  }
+  
+  /* Optional: Add hover effects */
+  .navbar-brand
+{
+   color: #b80a21;
+}
+  
+  

@@ -1,0 +1,31 @@
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.text-bg-primary {
+    background-color: #b80a21 !important;
+    color: #fff;
+  }
+  .border-light-subtle {
+    border-color: rgba(0, 0, 0, 0.1);
+  }
+  .bsb-btn-xl {
+    padding: 1em 2em;
+    font-size: 1em;
+  }
+
+  .container{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     text-align: center;
+  }
+
+  .navbar-brand
+{
+   color: #b80a21;
+}
+  

@@ -1,29 +1,25 @@
-// src/LoginPage.js
-
 import React, { useState } from 'react';
-import {  signInWithEmailAndPassword } from 'firebase/auth';
- 
-import { auth} from '../firebaseconfig';
-
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebaseconfig';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/login.css'; // Import the custom CSS
 
+// Importing images from the assets folder
+import ReportifyLogo from '../assets/ReportifyLogo.png';
+import ReportifyGraphic from '../assets/ReportifyLogo.png';
 
-// LoginPage Component
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Handle login form submission
   const handleLogin = (event) => {
     event.preventDefault();
     setErrorMessage('');
-
-    // Sign in with Firebase Auth
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log('Logged in as:', userCredential.user.email);
-        window.location.href = './home'; // Redirect on success
+        window.location.href = './home';
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -34,9 +30,18 @@ const LoginPage = () => {
 
   return (
     <div>
-      <nav className="navbar bg-body-tertiary">
+      <nav className="navbar" style={{ backgroundColor: '#b80a21' }}>
         <div className="container-fluid">
-          <span className="navbar-brand mb-0 h1">Reportify</span>
+          <a className="navbar-brand d-flex align-items-center" href="preview.html">
+            <img
+              src={ReportifyLogo}
+              alt="Reportify Logo"
+              width="80"
+              height="40"
+              className="d-inline-block me-2"
+            />
+            <span className="text-white">Reportify</span>
+          </a>
         </div>
       </nav>
       <div className="container">
@@ -48,10 +53,10 @@ const LoginPage = () => {
                   <img
                     className="img-fluid rounded mb-4"
                     loading="lazy"
-                    src="ReportifyLogo.png"
+                    src={ReportifyGraphic}
                     width="245"
                     height="50"
-                    alt="BootstrapBrain Logo"
+                    alt="Reportify Graphic"
                   />
                   <hr className="border-primary-subtle mb-4" />
                   <h2 className="h1 mb-4">We make digital products that drive you to stand out.</h2>
@@ -63,13 +68,7 @@ const LoginPage = () => {
             </div>
             <div className="col-12 col-md-6">
               <div className="card-body p-3 p-md-4 p-xl-5">
-                <div className="row">
-                  <div className="col-12">
-                    <div className="mb-5">
-                      <h3>Log in</h3>
-                    </div>
-                  </div>
-                </div>
+                <h3>Log in</h3>
                 <form onSubmit={handleLogin}>
                   <div className="row gy-3 gy-md-4 overflow-hidden">
                     <div className="col-12">
@@ -79,7 +78,6 @@ const LoginPage = () => {
                       <input
                         type="email"
                         className="form-control"
-                        name="email"
                         id="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -94,7 +92,6 @@ const LoginPage = () => {
                       <input
                         type="password"
                         className="form-control"
-                        name="password"
                         id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -103,7 +100,7 @@ const LoginPage = () => {
                     </div>
                     <div className="col-12">
                       <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" name="remember_me" id="remember_me" />
+                        <input className="form-check-input" type="checkbox" id="remember_me" />
                         <label className="form-check-label text-secondary" htmlFor="remember_me">
                           Keep me logged in
                         </label>
@@ -119,34 +116,20 @@ const LoginPage = () => {
                   </div>
                 </form>
                 {errorMessage && <p className="text-danger mt-3">{errorMessage}</p>}
-                <div className="row">
-                  <div className="col-12">
-                    <hr className="mt-5 mb-4 border-secondary-subtle" />
-                    <div className="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
-                      <a href="signup.html" className="link-secondary text-decoration-none">
-                        Create new account
-                      </a>
-                      <a href="#!" className="link-secondary text-decoration-none">
-                        Forgot password
-                      </a>
-                    </div>
-                  </div>
+                <hr className="mt-5 mb-4 border-secondary-subtle" />
+                <div className="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
+                  <a href="signup" className="link-secondary text-decoration-none">
+                    Create new account
+                  </a>
+                  <a href="#!" className="link-secondary text-decoration-none">
+                    Forgot password
+                  </a>
                 </div>
-                <div className="row">
-                  <div className="col-12">
-                    <p className="mt-5 mb-4">Or sign in with</p>
-                    <div className="d-flex gap-3 flex-column flex-xl-row">
-                      <a href="#!" className="btn bsb-btn-xl btn-outline-danger">
-                        <span className="ms-2 fs-6">Google</span>
-                      </a>
-                      <a href="#!" className="btn bsb-btn-xl btn-outline-danger">
-                        <span className="ms-2 fs-6">Facebook</span>
-                      </a>
-                      <a href="#!" className="btn bsb-btn-xl btn-outline-danger">
-                        <span className="ms-2 fs-6">Twitter</span>
-                      </a>
-                    </div>
-                  </div>
+                <p className="mt-5 mb-4">Or sign in with</p>
+                <div className="d-flex gap-3 flex-column flex-xl-row">
+                  <button className="btn bsb-btn-xl btn-outline-danger">Google</button>
+                  <button className="btn bsb-btn-xl btn-outline-danger">Facebook</button>
+                  <button className="btn bsb-btn-xl btn-outline-danger">Twitter</button>
                 </div>
               </div>
             </div>
